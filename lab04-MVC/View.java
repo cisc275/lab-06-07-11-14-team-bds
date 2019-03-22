@@ -9,11 +9,12 @@
  **/
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
+import java.awt.Dimension;
+import javax.swing.JButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -38,6 +39,7 @@ public class View {
 
     private JFrame frame;
 
+    private JButton button = new JButton();
     public View() {
         this(500, 300, 165, 165);
     }
@@ -96,17 +98,21 @@ public class View {
     @SuppressWarnings("serial")
     private void buildFrame() {
         frame = new JFrame();
-        frame.setBackground(Color.gray);
+        frame.setBackground(Color.WHITE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
         frame.getContentPane().add(new JPanel() {
                 @Override
-                public void paint(Graphics g) {
-                    g.toString();
-                    g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
-
+                public void paintComponent(Graphics g) {
+                    super.paintComponent(g);
+		    g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.WHITE, frame);
+                }
+                @Override
+                public Dimension getPreferredSize() {
+                    return new Dimension(getWidth(),getHeight());
                 }
             });
+        frame.revalidate();
         frame.setVisible(true);
     }
 }

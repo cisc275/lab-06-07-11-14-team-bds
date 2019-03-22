@@ -82,12 +82,6 @@ public class Model{
         xloc += xVel;
         yloc += yVel;
 
-        try {
-            Thread.sleep(90);
-        } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
-        }
-
     }
 
     private void checkBoundry() {
