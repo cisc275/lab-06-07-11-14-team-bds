@@ -20,6 +20,9 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 
+import java.awt.*;
+import java.awt.event.*;
+
 public class View {
     private String file_location = "../resources/";
 
@@ -116,6 +119,11 @@ public class View {
 
                 }
             });
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("====================");
+            }
+        });
         frame.add(button);
         frame.setVisible(true);
     }
