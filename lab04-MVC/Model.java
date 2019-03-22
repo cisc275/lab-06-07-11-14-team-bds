@@ -22,9 +22,9 @@ public class Model{
     private int yloc = 20;
     private final int xIncr = 8;
     private final int yIncr = 4;
-    
+
     private Direction d = Direction.NORTH;
-    
+
     public Model(int fw, int fh, int iw, int ih){
         this.FRAMEWIDTH = fw;
         this.FRAMEHEIGHT = fh;
