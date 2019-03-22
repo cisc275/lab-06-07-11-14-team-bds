@@ -17,6 +17,7 @@ public class Model{
 
     private boolean goingRight = true;
     private boolean goingDown = true;
+    private boolean paused = false;
 
     private int xloc = 20;
     private int yloc = 20;
@@ -35,15 +36,15 @@ public class Model{
     public int getX(){
         return xloc;
     }
-    
+
     public int getY(){
         return yloc;
     }
-    
+
     public Direction getDirect(){
         return d;
     }
-    
+
     private Direction getDirection(int xDir, int yDir){
         if ( xDir < 0 ){
             if ( yDir < 0 ){
@@ -72,6 +73,10 @@ public class Model{
     }
 
     public void updateLocationAndDirection(){
+        if(paused) {
+          return;
+        }
+
         checkBoundry();
 
         int xVel = goingRight ? xIncr : -xIncr;
@@ -95,5 +100,9 @@ public class Model{
         }else if (yloc + IMAGEHEIGHT > FRAMEHEIGHT) {
             goingDown = false;
         }
+    }
+
+    public void startStop() {
+      paused = !paused;
     }
 }
