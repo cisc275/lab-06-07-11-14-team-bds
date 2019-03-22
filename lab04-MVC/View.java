@@ -31,14 +31,14 @@ public class View {
 
     private final int displayWidth;
     private final int displayHeight;
-    
+
     private final int imgWidth;
     private final int imgHeight;
 
     private int frameCount = 10;
     private EnumMap<Direction, BufferedImage[]> pics;
 
-    private Direction direction;;
+    private Direction direction;
     private int frameNum = 0;
     private int xLoc;
     private int yLoc;
