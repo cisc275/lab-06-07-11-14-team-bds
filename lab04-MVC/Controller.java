@@ -11,9 +11,9 @@ public class Controller {
     class ButtonController implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println(":D");
+            model.startStop();
         }
-    
+
     }
 
     private Model model;
