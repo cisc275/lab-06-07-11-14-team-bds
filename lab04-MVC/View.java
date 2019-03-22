@@ -119,11 +119,7 @@ public class View {
 
                 }
             });
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("====================");
-            }
-        });
+        button.addActionListener(new ButtonController());
         frame.add(button);
         frame.setVisible(true);
     }
