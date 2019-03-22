@@ -13,12 +13,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.EnumMap;
-import java.awt.Dimension;
-import javax.swing.JButton;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.GridLayout;
+import javax.swing.JButton;
 
 public class View {
     private String file_location = "../resources/";
@@ -26,6 +26,9 @@ public class View {
     private final int frameWidth;
     private final int frameHeight;
 
+    private final int displayWidth;
+    private final int displayHeight;
+    
     private final int imgWidth;
     private final int imgHeight;
 
@@ -38,15 +41,18 @@ public class View {
     private int yLoc;
 
     private JFrame frame;
-
     private JButton button = new JButton();
+
     public View() {
-        this(500, 300, 165, 165);
+        this(500, 500, 165, 165);
     }
 
     public View(int w, int h, int imgW, int imgH) {
         this.frameWidth = w;
         this.frameHeight = h;
+
+        this.displayWidth = this.frameWidth;
+        this.displayHeight = this.frameHeight / 2;
         this.imgWidth = imgW;
         this.imgHeight = imgH;
 
@@ -63,8 +69,8 @@ public class View {
         frame.repaint();
     }
 
-    public int getWidth() { return this.frameWidth; }
-    public int getHeight() { return this.frameHeight; }
+    public int getWidth() { return this.displayWidth; }
+    public int getHeight() { return this.displayHeight; }
     public int getImageWidth() { return this.imgWidth; }
     public int getImageHeight() { return this.imgHeight; }
 
@@ -98,21 +104,19 @@ public class View {
     @SuppressWarnings("serial")
     private void buildFrame() {
         frame = new JFrame();
-        frame.setBackground(Color.WHITE);
+        frame.setBackground(Color.gray);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
+        frame.setLayout(new GridLayout(2,1));
         frame.getContentPane().add(new JPanel() {
                 @Override
-                public void paintComponent(Graphics g) {
-                    super.paintComponent(g);
-		    g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.WHITE, frame);
-                }
-                @Override
-                public Dimension getPreferredSize() {
-                    return new Dimension(getWidth(),getHeight());
+                public void paint(Graphics g) {
+                    g.toString();
+                    g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
+
                 }
             });
-        frame.revalidate();
+        frame.add(button);
         frame.setVisible(true);
     }
 }
