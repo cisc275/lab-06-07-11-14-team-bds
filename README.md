@@ -1,2 +1,2 @@
-Hello amigos I find out how to get in the read me.
-`
+Hello amigos, good work today on lab 6
+
