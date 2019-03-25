@@ -26,10 +26,10 @@ import java.awt.event.*;
 public class View {
     private String file_location = "../resources/";
 
-    private final int frameWidth;
-    private final int frameHeight;
-    private final int contentWidth;
-    private final int contentHeight;
+    private int frameWidth;
+    private int frameHeight;
+    private int contentWidth;
+    private int contentHeight;
 
     private final int imgWidth;
     private final int imgHeight;
@@ -80,6 +80,13 @@ public class View {
     public int getImageHeight() { return this.imgHeight; }
     public JButton getButton() { return this.button; }
     public JFrame getFrame() { return this.frame; }
+
+    public void updateDimensions() {
+        this.frameWidth = frame.getWidth();
+        this.frameHeight = frame.getHeight();
+        this.contentWidth = this.frameWidth;
+        this.contentHeight = this.frameHeight / 2;
+    }
 
     private void loadImages(String filepath) {
         pics = new EnumMap<Direction, BufferedImage[]>(Direction.class);

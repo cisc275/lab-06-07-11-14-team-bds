@@ -28,7 +28,8 @@ public class Controller {
         //resize the orc running area when the window is resized
         view.getFrame().addComponentListener(new ComponentAdapter() {
           public void componentResized(ComponentEvent e) {
-            model.setFrameDimensions(view.getFrame().getWidth(), view.getFrame().getHeight()/2);
+              view.updateDimensions();
+              model.setFrameDimensions(view.getWidth(), view.getHeight());
           }
         });
     }
