@@ -9,8 +9,8 @@
  **/
 
 public class Model{
-    private final int FRAMEWIDTH;
-    private final int FRAMEHEIGHT;
+    private int FRAMEWIDTH;
+    private int FRAMEHEIGHT;
     private final int IMAGEWIDTH;
     private final int IMAGEHEIGHT;
 
@@ -112,5 +112,10 @@ public class Model{
 
     public void startStop() {
       paused = !paused;
+    }
+
+    public void setFrameDimensions(int width, int height) {
+      FRAMEWIDTH = width;
+      FRAMEHEIGHT = height;
     }
 }

@@ -30,7 +30,7 @@ public class View {
     private final int frameHeight;
     private final int contentWidth;
     private final int contentHeight;
-    
+
     private final int imgWidth;
     private final int imgHeight;
 
@@ -79,6 +79,7 @@ public class View {
     public int getImageWidth() { return this.imgWidth; }
     public int getImageHeight() { return this.imgHeight; }
     public JButton getButton() { return this.button; }
+    public JFrame getFrame() { return this.frame; }
 
     private void loadImages(String filepath) {
         pics = new EnumMap<Direction, BufferedImage[]>(Direction.class);
