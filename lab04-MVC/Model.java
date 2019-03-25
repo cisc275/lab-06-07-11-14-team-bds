@@ -20,11 +20,13 @@ public class Model{
 
     private int xloc = 20;
     private int yloc = 20;
-    private final int xIncr = 8;
-    private final int yIncr = 4;
-    
+
+    private int xIncr = 8;
+    private int yIncr = 4;
+    private boolean moving = true;
+
     private Direction d = Direction.NORTH;
-    
+
     public Model(int fw, int fh, int iw, int ih){
         this.FRAMEWIDTH = fw;
         this.FRAMEHEIGHT = fh;
@@ -32,18 +34,29 @@ public class Model{
         this.IMAGEHEIGHT = ih;
     }
 
+    public void toggleOrc() {
+        if (xIncr == 0 && yIncr == 0) {
+            xIncr = 8;
+            yIncr = 4;
+        } else {
+            xIncr = 0;
+            yIncr = 0;
+        }
+        moving = !moving;
+    }
+
     public int getX(){
         return xloc;
     }
-    
+
     public int getY(){
         return yloc;
     }
-    
+
     public Direction getDirect(){
         return d;
     }
-    
+
     private Direction getDirection(int xDir, int yDir){
         if ( xDir < 0 ){
             if ( yDir < 0 ){
@@ -72,8 +85,8 @@ public class Model{
     }
 
     public void updateLocationAndDirection(){
-        checkBoundry();
 
+        checkBoundry();
         int xVel = goingRight ? xIncr : -xIncr;
         int yVel = goingDown ? yIncr : -yIncr;
 

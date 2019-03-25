@@ -7,6 +7,7 @@
  * use proper images for direction
  * load images for all direction (an image should only be loaded once!!! why?)
  **/
+import java.lang.NullPointerException;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -19,12 +20,15 @@ import javax.swing.JButton;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.GridLayout;
 
 public class View {
     private String file_location = "../resources/";
 
     private final int frameWidth;
     private final int frameHeight;
+    private final int contentWidth;
+    private final int contentHeight;
 
     private final int imgWidth;
     private final int imgHeight;
@@ -41,12 +45,15 @@ public class View {
 
     private JButton button = new JButton();
     public View() {
-        this(500, 300, 165, 165);
+        this(500, 600, 165, 165);
     }
 
     public View(int w, int h, int imgW, int imgH) {
         this.frameWidth = w;
         this.frameHeight = h;
+
+        this.contentWidth = this.frameWidth;
+        this.contentHeight = this.frameHeight / 2;
         this.imgWidth = imgW;
         this.imgHeight = imgH;
 
@@ -56,17 +63,21 @@ public class View {
     }
 
     public void update(int x, int y, Direction d) {
+        if (this.xLoc != x || this.yLoc != y) {
+            frameNum = (frameNum + 1) % frameCount;
+        }
+
         this.xLoc = x;
         this.yLoc = y;
         this.direction = d;
-        frameNum = (frameNum + 1) % frameCount;
         frame.repaint();
     }
 
-    public int getWidth() { return this.frameWidth; }
-    public int getHeight() { return this.frameHeight; }
+    public int getWidth() { return this.contentWidth; }
+    public int getHeight() { return this.contentHeight; }
     public int getImageWidth() { return this.imgWidth; }
     public int getImageHeight() { return this.imgHeight; }
+    public JButton getButton() { return this.button; }
 
     private void loadImages(String filepath) {
         pics = new EnumMap<Direction, BufferedImage[]>(Direction.class);
@@ -101,18 +112,20 @@ public class View {
         frame.setBackground(Color.WHITE);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(frameWidth, frameHeight);
+        frame.setLayout(new GridLayout(2,1));
         frame.getContentPane().add(new JPanel() {
                 @Override
                 public void paintComponent(Graphics g) {
                     super.paintComponent(g);
-		    g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.WHITE, frame);
-                }
-                @Override
-                public Dimension getPreferredSize() {
-                    return new Dimension(getWidth(),getHeight());
+                    try{
+                        g.drawImage(pics.get(direction)[frameNum], xLoc, yLoc, Color.gray, this);
+                    } catch(NullPointerException e) {
+                        System.out.println("tbh im not sure");
+                    }
+
                 }
             });
-        frame.revalidate();
+        frame.add(button);
         frame.setVisible(true);
     }
 }
