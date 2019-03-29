@@ -16,7 +16,6 @@ public class Model{
 
     private boolean goingRight = true;
     private boolean goingDown = true;
-    private boolean paused = false;
 
     private int xloc = 20;
     private int yloc = 20;
@@ -24,6 +23,10 @@ public class Model{
     private int xIncr = 8;
     private int yIncr = 4;
     private boolean moving = true;
+    private boolean fireing = false;
+    private boolean dying = false;
+
+    private int frame = 0;
 
     private Direction d = Direction.NORTH;
 
@@ -43,6 +46,18 @@ public class Model{
             yIncr = 0;
         }
         moving = !moving;
+    }
+
+    public void fireOrc() {
+        xIncr = 0;
+        yIncr = 0;
+        frame = 4;
+    }
+
+    public void dieOrc() {
+        xIncr = 0;
+        yIncr = 0;
+        frame = 8;
     }
 
     public int getX(){
@@ -85,6 +100,12 @@ public class Model{
     }
 
     public void updateLocationAndDirection(){
+        if (frame > 0) {
+            frame--;
+            if (frame == 0) {
+                toggleOrc();
+            }
+        }
 
         checkBoundry();
         int xVel = goingRight ? xIncr : -xIncr;
@@ -108,10 +129,6 @@ public class Model{
         }else if (yloc + IMAGEHEIGHT > FRAMEHEIGHT) {
             goingDown = false;
         }
-    }
-
-    public void startStop() {
-      paused = !paused;
     }
 
     public void setFrameDimensions(int width, int height) {
